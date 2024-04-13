@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import ActiveChatters from "./components/activeChatters";
+import ChatBox from "./components/chatbox";
+import ChatRooms from "./components/chatrooms";
+import Terminal from "./components/terminal";
+import { useActiveChatroom } from "./context/activeChatroomContext";
+
+
 
 function App() {
+  const { activeChatroom } = useActiveChatroom();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App bg-primary text-white p-2 h-screen w-screen flex justify-center gap-2 items-center">
+      <ChatRooms />
+      {!activeChatroom && (<div className="font-bold text-3xl">Select a chatroom from the panel</div>)}
+      {activeChatroom && (<ActiveChatters />)}
+      {activeChatroom && <ChatBox />}
+      {activeChatroom && <Terminal/>}
+
+
     </div>
   );
 }
